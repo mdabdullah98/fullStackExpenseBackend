@@ -13,7 +13,13 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use("/", route);
 
-//syncing all the created model so that
-server.listen(port, () => {
-  console.log(`server is running on port http://localhost:${port}`);
-});
+//syncing all the created model so that the table coulde created
+
+sequelize
+  .sync()
+  .then((resul) => {
+    server.listen(port, () => {
+      console.log(`server is running on port http://localhost:${port}`);
+    });
+  })
+  .catch((err) => console.log(err));
