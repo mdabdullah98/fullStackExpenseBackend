@@ -33,6 +33,23 @@ exports.getExpense = (req, res) => {
     });
 };
 
+exports.updateExpense = (req, res) => {
+  const id = req.params.id;
+  Expense.findByPk(id)
+    .then((expense) => {
+      expense.amount = req.body.amount;
+      expense.description = req.body.description;
+      expense.catagory = req.body.catagory;
+      return expense.save();
+    })
+    .then((data) => {
+      res.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send(err);
+    });
+};
 exports.deleteExpense = (req, res) => {
   const id = req.params.id;
 
