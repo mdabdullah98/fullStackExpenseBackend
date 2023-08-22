@@ -17,7 +17,7 @@ server.use("/", route);
 
 sequelize
   .sync()
-  .then((resul) => {
+  .then((result) => {
     server.listen(port, () => {
       console.log(`server is running on port http://localhost:${port}`);
     });
